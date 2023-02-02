@@ -1,10 +1,10 @@
 import 'react-native';
 
-import { cleanup, fireEvent, render, screen } from '@testing-library/react-native';
+// import { cleanup, fireEvent, render, screen } from '@testing-library/react-native';
 
-import { Example } from './index';
+// import { Example } from './index';
 
-afterEach(cleanup);
+// afterEach(cleanup);
 
 describe('Example Component tests', () => {
     // it('Renders correctly', async () => {
