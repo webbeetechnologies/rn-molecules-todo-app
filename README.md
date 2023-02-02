@@ -2,11 +2,12 @@
 
 ## User Stories
 
--   As a user, I want to add a todo
--   As a user, I want to mark a todo as done
--   As a user, I want to delete a todo
--   As a user, I want to distinguish a completed todo from a pending one
--   As a user, I want to be able to use the application in dark mode
+- [x] As a user, I want to see all the todo items in one screen
+- [x] As a user, I want to mark a todo as done
+- [x] As a user, I want to distinguish a completed todo from a pending one
+- [x] As a user, I want to be able to use the application in dark mode
+- [ ] As a user, I want to add a todo
+- [ ] As a user, I want to delete a todo
 
 ## Features
 
