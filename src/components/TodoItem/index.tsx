@@ -1,10 +1,19 @@
-import { useMolecules } from '@bambooapp/bamboo-molecules';
+import { useComponentStyles, useMolecules } from '@bambooapp/bamboo-molecules';
 import { useCallback } from 'react';
 import { FC, useMemo } from 'react';
-import type { TextStyle } from 'react-native';
 
 import type { TodoItem } from '~/store';
 import { useTodo } from '~/store/hooks';
+
+export const defaultStyles = {
+    states: {
+        isPending: {},
+        isDone: {
+            color: 'red',
+            textDecorationLine: 'line-through',
+        },
+    },
+};
 
 export const Todo: FC<Pick<TodoItem, 'id'>> = ({ id }: { id: string }) => {
     const {
@@ -13,16 +22,12 @@ export const Todo: FC<Pick<TodoItem, 'id'>> = ({ id }: { id: string }) => {
     } = useTodo(id);
     const { ListItem, Checkbox } = useMolecules();
 
-    const style = useMemo(
-        () =>
-            isDone
-                ? ({
-                      color: 'red',
-                      textDecorationLine: 'line-through',
-                  } as TextStyle)
-                : {},
-        [isDone],
-    );
+    const styles = useComponentStyles('Todo', null, {
+        states: {
+            isDone,
+            isPending: !isDone,
+        },
+    });
 
     const handleToggle = useCallback(() => {
         markAsDone({ id, isDone: !isDone });
@@ -34,7 +39,7 @@ export const Todo: FC<Pick<TodoItem, 'id'>> = ({ id }: { id: string }) => {
 
     return (
         <ListItem right={right}>
-            <ListItem.Title style={style}>{label}</ListItem.Title>
+            <ListItem.Title style={styles}>{label}</ListItem.Title>
         </ListItem>
     );
 };
