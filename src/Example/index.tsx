@@ -3,6 +3,9 @@ import { FC, useCallback, useState } from 'react';
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
+    wrap: {
+        padding: 'spacings.4',
+    },
     text: {
         alignSelf: 'center',
         marginBottom: 'spacings.2',
@@ -19,7 +22,7 @@ export const Example: FC<Omit<ButtonProps, 'children'>> = ({ onPress, ...props }
     }, [onPress, setCounter]);
 
     return (
-        <View>
+        <View style={styles.wrap}>
             <Text style={styles.text}>Hello, we made it!</Text>
             <Button variant="contained" {...props} onPress={handlePress}>
                 <Text>{`Clicked ${counter} times`}</Text>
