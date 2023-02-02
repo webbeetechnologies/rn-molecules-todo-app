@@ -1,3 +1,5 @@
+import React from "react";
+
 import { makeDecorator } from '@storybook/addons';
 
 import { ProvideMolecules } from "@bambooapp/bamboo-molecules"

@@ -1,11 +1,15 @@
+import { useColorMode } from '@bambooapp/bamboo-molecules';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
+import { DarkTheme, DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import type { ComponentProps, FC } from 'react';
 import { useMemo } from 'react';
 
 import { TodoList } from '~/components/TodoList';
 import { TodoProvider } from '~/store';
 import type { TodoListState } from '~/store/state.types';
+
+import { ColorModeToggle } from './components/ColorModeToggle';
+import { DrawerIcon } from './components/DrawerIcon';
 
 const getScreen =
     (props: Partial<ComponentProps<typeof TodoList>>): FC =>
@@ -15,25 +19,39 @@ const getScreen =
 
 const Drawer = createDrawerNavigator();
 
+const screenOptions: ComponentProps<typeof Drawer.Navigator>['screenOptions'] = _props => ({
+    headerRight: _headerRightProps => <ColorModeToggle />,
+    headerLeft: _headerLeftProps => <DrawerIcon />,
+});
+
 export default function Navigator() {
+    const { colorMode } = useColorMode();
+
     const { listScreen, completedScreen } = useMemo(
         () => ({
-            listScreen: getScreen({
-                filter: (records: TodoListState['todos']) => records,
-            }),
-            completedScreen: getScreen({
-                filter: (records: TodoListState['todos']) => records.filter(({ isDone }) => isDone),
-            }),
+            listScreen: {
+                options: { title: 'All' },
+                children: getScreen({
+                    filter: (records: TodoListState['todos']) => records,
+                }),
+            },
+            completedScreen: {
+                options: { title: 'Completed' },
+                children: getScreen({
+                    filter: (records: TodoListState['todos']) =>
+                        records.filter(({ isDone }) => isDone),
+                }),
+            },
         }),
         [],
     );
 
     return (
         <TodoProvider>
-            <NavigationContainer>
-                <Drawer.Navigator>
-                    <Drawer.Screen name="all" children={listScreen} />
-                    <Drawer.Screen name="completed" children={completedScreen} />
+            <NavigationContainer theme={colorMode === 'dark' ? DarkTheme : DefaultTheme}>
+                <Drawer.Navigator screenOptions={screenOptions}>
+                    <Drawer.Screen name="all" {...listScreen} />
+                    <Drawer.Screen name="completed" {...completedScreen} />
                 </Drawer.Navigator>
             </NavigationContainer>
         </TodoProvider>
