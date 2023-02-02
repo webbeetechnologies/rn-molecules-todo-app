@@ -1,3 +1,4 @@
+import uniqueId from 'lodash/uniqueId';
 import { FC, memo, PropsWithChildren, useCallback, useMemo, useReducer } from 'react';
 
 import {
@@ -10,12 +11,32 @@ import {
 import { TodoContext } from '~/store/todo-context';
 
 const todoReducer = (state: TodoListState['todos'], action: TodoAction) => {
+    const now = new Date();
     switch (action.type) {
         case EnumTodoAction.ADD:
+            state = [
+                ...state,
+                {
+                    id: uniqueId(),
+                    label: action.payload.label,
+                    isDone: false,
+                    createdAt: now,
+                    updatedAt: now,
+                },
+            ];
             break;
         case EnumTodoAction.REMOVE:
+            state = state.filter(({ id }) => id !== action.payload.id);
             break;
         case EnumTodoAction.UPDATE:
+            state = state.map(item =>
+                item.id !== action.payload.id
+                    ? item
+                    : {
+                          ...item,
+                          ...action.payload,
+                      },
+            );
             break;
     }
     return state;
