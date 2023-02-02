@@ -24,13 +24,16 @@
     "cleanup": "rm -rf lib prepublish",
     "package": "mkdir -p dist && npm pack --pack-destination=dist",
     "bundle": "yarn cleanup && bob build",
-    "build": "yarn bundle && yarn package"
+    "build": "yarn bundle && yarn package",
+    "coverage": "cp coverage/storybook/coverage-storybook.json coverage/coverage-storybook.json && nyc report --reporter=html -t coverage --report-dir coverage/lcov-report",
+    "test:coverage": "yarn test --coverage && yarn test-storybook --coverage && yarn coverage"
   },
   "files": [
     "lib",
     "!src"
   ],
   "jest": {
+    "coverageReporters": ["json"],
     "preset": "react-native",
     "setupFiles": [],
     "setupFilesAfterEnv": [
@@ -49,7 +52,7 @@
       ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub"
     },
     "transformIgnorePatterns": [
-      "node_modules/(?!(@react-native|react-native|react-native-super-grid|react-native-vector-icons|react-native-web-hooks|react-native-actions-sheet|@expo/vector-icons|expo-font|react-native-iphone-x-helper)/)"
+      "node_modules/(?!(@react-native|react-native|react-native-super-grid|react-native-vector-icons|react-native-web-hooks|react-native-actions-sheet|@expo/vector-icons|expo-font|react-native-iphone-x-helper|@bambooapp/*)/)"
     ]
   },
   "devDependencies": {
@@ -69,8 +72,10 @@
     "@storybook/addon-react-native-web": "^0.0.18",
     "@storybook/addon-storyshots": "^6.5.12",
     "@storybook/builder-webpack4": "^6.5.10",
+    "@storybook/builder-webpack5": "^6.5.16",
     "@storybook/jest": "^0.0.10",
     "@storybook/manager-webpack4": "^6.5.10",
+    "@storybook/manager-webpack5": "^6.5.16",
     "@storybook/react": "^6.5.10",
     "@storybook/react-native": "next",
     "@storybook/test-runner": "^0.7.1",
@@ -121,7 +126,6 @@
     "@react-navigation/drawer": "^6.5.8",
     "@react-navigation/native": "^6.1.3",
     "@shopify/flash-list": "1.3.1",
-    "@webbeetechnologies/bamboo-molecules": "^0.1.13",
     "expo": "~47.0.12",
     "expo-splash-screen": "~0.17.5",
     "expo-status-bar": "~1.4.2",
