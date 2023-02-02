@@ -39,6 +39,7 @@ const todoReducer = (state: TodoListState['todos'], action: TodoAction) => {
             );
             break;
     }
+
     return state;
 };
 
@@ -88,7 +89,16 @@ export const TodoProvider: FC<PropsWithChildren> = memo(props => {
     );
 
     const updateTodo = useCallback(
-        (payload: PartialTodo) => dispatch({ type: EnumTodoAction.REMOVE, payload }),
+        (payload: PartialTodo) => dispatch({ type: EnumTodoAction.UPDATE, payload }),
+        [dispatch],
+    );
+
+    const markAsDone = useCallback(
+        (payload: PartialTodo) =>
+            dispatch({
+                type: EnumTodoAction.UPDATE,
+                payload: { id: payload.id, isDone: payload.isDone ?? false },
+            }),
         [dispatch],
     );
 
@@ -98,8 +108,9 @@ export const TodoProvider: FC<PropsWithChildren> = memo(props => {
             addTodo,
             removeTodo,
             updateTodo,
+            markAsDone,
         }),
-        [todoList, addTodo, removeTodo, updateTodo],
+        [todoList, addTodo, removeTodo, markAsDone, updateTodo],
     );
 
     return <TodoContext.Provider value={memoizedState} {...props} />;

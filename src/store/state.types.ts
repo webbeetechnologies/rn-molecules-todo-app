@@ -3,6 +3,7 @@ export type TodoListState = {
     addTodo: Action<AddTodo['payload']>;
     removeTodo: Action<RemoveTodo['payload']>;
     updateTodo: Action<UpdateTodo['payload']>;
+    markAsDone: Action<Required<Pick<UpdateTodo['payload'], 'id' | 'isDone'>>>;
 };
 
 type Action<T> = (args: T) => void;
@@ -19,6 +20,7 @@ export enum EnumTodoAction {
     ADD,
     REMOVE,
     UPDATE,
+    MARK_AS_DONE,
 }
 
 export type TodoAction = UpdateTodo | RemoveTodo | AddTodo;

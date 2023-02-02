@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 
 import { TodoContext } from '~/store/todo-context';
 
@@ -11,7 +11,9 @@ export const useTodoState = () => {
 };
 
 export const useTodo = (todoId: string) => {
-    const todo = useTodoState().todos.find(({ id }) => id === todoId);
+    const { todos, markAsDone } = useTodoState();
+    const todo = todos.find(({ id }) => id === todoId);
     if (!todo) throw new Error(`Trying to read a todo [${todoId}] that doesn't exist`);
-    return todo;
+
+    return useMemo(() => ({ todo, markAsDone }), [todo, markAsDone]);
 };
