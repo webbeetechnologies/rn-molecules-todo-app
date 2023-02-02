@@ -1278,14 +1278,22 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
-"@bambooapp/bamboo-molecules@^0.1.15":
-  version "0.1.15"
-  resolved "https://registry.yarnpkg.com/@bambooapp/bamboo-molecules/-/bamboo-molecules-0.1.15.tgz#f43e1bf641548aa17ee053ac620176b8d9404251"
-  integrity sha512-A/f/XYliTGz+qUP89eweDj5X9K2KGSB8dtDawZ714418M8wbIweiDX2qq5/0xXuT/KeTbgTuX5H36nWu06cdlg==
+"@bambooapp/bamboo-atoms@^0.0.19":
+  version "0.0.19"
+  resolved "https://registry.yarnpkg.com/@bambooapp/bamboo-atoms/-/bamboo-atoms-0.0.19.tgz#bcdb16d14c0486e624c91e8eccb0e512506d5a5c"
+  integrity sha512-hYGP8n1cl3hyzunc1fAj61bfhpFBPP6byZeUMl0iw0GRymu00GIer05P2xlx4UCbkLxtL1fpYZMCAc4d++EQDw==
   dependencies:
+    lodash.isnil "^4.0.0"
+    ts-deepmerge "^3.0.0"
+
+"@bambooapp/bamboo-molecules@^0.1.16":
+  version "0.1.16"
+  resolved "https://registry.yarnpkg.com/@bambooapp/bamboo-molecules/-/bamboo-molecules-0.1.16.tgz#32e8ae893c2ff803d20ccb0902d7a305d87e9ca4"
+  integrity sha512-dszALsxd4qLyvx2u3NXUHluRTZm6s/auWH7/y7Q/6L5xs80r5Ozea31oor9f+yaFSnq4jY64jlBtATGdcY9jzg==
+  dependencies:
+    "@bambooapp/bamboo-atoms" "^0.0.19"
     "@react-native-aria/overlays" "^0.3.2"
     "@types/lodash.omitby" "^4.6.7"
-    "@webbee/bamboo-atoms" "^0.0.18"
     color "^4.2.3"
     date-fns "^2.29.3"
     lodash.get "^4.4.2"
@@ -5533,14 +5541,6 @@
     "@webassemblyjs/ast" "1.9.0"
     "@webassemblyjs/wast-parser" "1.9.0"
     "@xtuc/long" "4.2.2"
-
-"@webbee/bamboo-atoms@^0.0.18":
-  version "0.0.18"
-  resolved "https://registry.yarnpkg.com/@webbee/bamboo-atoms/-/bamboo-atoms-0.0.18.tgz#d6326f7ecedd99a53f05fb9cecdc9440f64014ab"
-  integrity sha512-XdHpdMNpQrXPFOC6JBrfAoBH8hU4n7hpehb7P6LXAm7Qqr8Fw71yhYwa/NP56VmxKSTmKQVbVTS4laTEbaVD/g==
-  dependencies:
-    lodash.isnil "^4.0.0"
-    ts-deepmerge "^3.0.0"
 
 "@xmldom/xmldom@~0.7.0":
   version "0.7.9"
