@@ -1,5 +1,5 @@
 {
-  "name": "@webbeetechnologies/frontend-starter-rn",
+  "name": "@webbeetechnologies/molecules-todo",
   "version": "0.0.1",
   "publishConfig": {
     "private": "restricted",
