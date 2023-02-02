@@ -1,15 +1,16 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
-import type { FC } from 'react';
+import type { ComponentProps, FC } from 'react';
 import { useMemo } from 'react';
 
-import { Example } from '~/Example';
+import { TodoList } from '~/components/TodoList';
+import { TodoProvider } from '~/store';
 import type { TodoListState } from '~/store/state.types';
 
 const getScreen =
-    (props): FC =>
+    (props: Partial<ComponentProps<typeof TodoList>>): FC =>
     _props => {
-        return <Example {...props} />;
+        return <TodoList {...props} />;
     };
 
 const Drawer = createDrawerNavigator();
@@ -28,11 +29,13 @@ export default function Navigator() {
     );
 
     return (
-        <NavigationContainer>
-            <Drawer.Navigator>
-                <Drawer.Screen name="all" children={listScreen} />
-                <Drawer.Screen name="completed" children={completedScreen} />
-            </Drawer.Navigator>
-        </NavigationContainer>
+        <TodoProvider>
+            <NavigationContainer>
+                <Drawer.Navigator>
+                    <Drawer.Screen name="all" children={listScreen} />
+                    <Drawer.Screen name="completed" children={completedScreen} />
+                </Drawer.Navigator>
+            </NavigationContainer>
+        </TodoProvider>
     );
 }

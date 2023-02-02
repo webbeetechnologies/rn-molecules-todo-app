@@ -21,8 +21,39 @@ const todoReducer = (state: TodoListState['todos'], action: TodoAction) => {
     return state;
 };
 
+const todosMocks: TodoItem[] = [
+    {
+        id: '0',
+        label: 'Item One',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        isDone: false,
+    },
+    {
+        id: '1',
+        label: 'Item Two',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        isDone: false,
+    },
+    {
+        id: '2',
+        label: 'Item Three',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        isDone: false,
+    },
+    {
+        id: '3',
+        label: 'Item Four',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        isDone: true,
+    },
+];
+
 export const TodoProvider: FC<PropsWithChildren> = memo(props => {
-    const [todoList, dispatch] = useReducer(todoReducer, []);
+    const [todoList, dispatch] = useReducer(todoReducer, todosMocks);
 
     const addTodo = useCallback(
         ({ label }: Pick<TodoItem, 'label'>) =>
