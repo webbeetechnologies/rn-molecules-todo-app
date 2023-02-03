@@ -22,12 +22,16 @@ export const Todo: FC<Pick<TodoItem, 'id'>> = ({ id }: { id: string }) => {
     } = useTodo(id);
     const { ListItem, Checkbox } = useMolecules();
 
-    const styles = useComponentStyles('Todo', null, {
-        states: {
-            isDone,
-            isPending: !isDone,
+    const styles = useComponentStyles(
+        'Todo',
+        {},
+        {
+            states: {
+                isDone,
+                isPending: !isDone,
+            },
         },
-    });
+    );
 
     const handleToggle = useCallback(() => {
         markAsDone({ id, isDone: !isDone });
