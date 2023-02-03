@@ -1,9 +1,12 @@
-import { useComponentStyles, useMolecules } from '@bambooapp/bamboo-molecules';
-import { useCallback } from 'react';
+import { useComponentStyles, useControlledValue, useToggle } from '@bambooapp/bamboo-molecules';
+import { useCallback, useEffect } from 'react';
 import { FC, useMemo } from 'react';
+import type { ViewStyle } from 'react-native';
 
 import type { TodoItem } from '~/store';
 import { useTodo } from '~/store/hooks';
+
+import { useMolecules } from '../hooks';
 
 export const defaultStyles = {
     rightIconContainer: {
@@ -20,12 +23,63 @@ export const defaultStyles = {
     },
 };
 
+type EditValueProps = {
+    todo: TodoItem;
+    style: ViewStyle;
+    onChange: (arg: Partial<TodoItem> & Pick<TodoItem, 'id'>) => void;
+};
+
+export const MaybeEditValue: FC<EditValueProps> = ({ style, todo, onChange }) => {
+    const { ListItem, TodoInput } = useMolecules();
+    const { state: isEdit, onToggle: toggleIsEdit, setState: setIsEdit } = useToggle();
+
+    const [value, setValue] = useControlledValue({
+        defaultValue: todo.label,
+    });
+
+    const handleSave = useCallback(() => {
+        setIsEdit(false);
+        onChange({ label: value, id: todo.id });
+    }, [setIsEdit, onChange, value, todo.id]);
+
+    const handleChange = useCallback(
+        (label: string) => {
+            setValue(label);
+        },
+        [setValue],
+    );
+
+    const handleCancel = useCallback(() => {
+        setIsEdit(false);
+        setValue(todo.label);
+    }, [setIsEdit, setValue, todo.label]);
+
+    useEffect(() => {
+        setIsEdit(false);
+    }, [setIsEdit, todo.isDone]);
+
+    if (!isEdit || todo.isDone) {
+        return (
+            <ListItem.Title onPress={todo.isDone ? undefined : toggleIsEdit} style={style}>
+                {todo.label}
+            </ListItem.Title>
+        );
+    }
+
+    return (
+        <TodoInput
+            value={value}
+            onCancel={handleCancel}
+            onSave={handleSave}
+            onChangeText={handleChange}
+        />
+    );
+};
+
 export const Todo: FC<Pick<TodoItem, 'id'>> = ({ id }: { id: string }) => {
-    const {
-        todo: { isDone, label },
-        markAsDone,
-        removeTodo,
-    } = useTodo(id);
+    const { todo, markAsDone, removeTodo, updateTodo } = useTodo(id);
+
+    const isDone = todo.isDone;
     const { Checkbox, IconButton, ListItem, View } = useMolecules();
 
     const componentStyles = useComponentStyles(
@@ -66,7 +120,7 @@ export const Todo: FC<Pick<TodoItem, 'id'>> = ({ id }: { id: string }) => {
 
     return (
         <ListItem right={right}>
-            <ListItem.Title style={styles}>{label}</ListItem.Title>
+            <MaybeEditValue todo={todo} style={styles} onChange={updateTodo} />
         </ListItem>
     );
 };

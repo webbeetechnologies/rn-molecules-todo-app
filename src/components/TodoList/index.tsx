@@ -1,5 +1,6 @@
 import { useControlledValue } from '@bambooapp/bamboo-molecules';
 import { FC, useCallback, useMemo } from 'react';
+import { StyleSheet } from 'react-native';
 
 import type { TodoItem, TodoListState } from '~/store';
 import { useTodoState } from '~/store/hooks';
@@ -11,6 +12,8 @@ type Props = {
 };
 
 const defaultFilter = (record: TodoItem[]) => record;
+
+const styles = StyleSheet.create({ container: { padding: 'spacings.4' } });
 
 const ListFooter = () => {
     const { TodoInput } = useMolecules();
@@ -29,7 +32,13 @@ const ListFooter = () => {
     }, [value, addTodo, setValue]);
 
     return (
-        <TodoInput value={value} onChangeText={setValue} onSave={onSave} onCancel={handleCancel} />
+        <TodoInput
+            style={styles.container}
+            value={value}
+            onChangeText={setValue}
+            onSave={onSave}
+            onCancel={handleCancel}
+        />
     );
 };
 
@@ -39,7 +48,16 @@ export const TodoList: FC<Props> = props => {
     const { FlatList, Todo } = useMolecules();
     const records = useMemo(() => filter(todos), [filter, todos]);
 
-    const renderItem = ({ item }: { item: TodoItem }) => <Todo id={item.id} />;
+    const renderItem = useCallback(({ item }: { item: TodoItem }) => <Todo id={item.id} />, [Todo]);
 
-    return <FlatList data={records} renderItem={renderItem} ListFooterComponent={ListFooter} />;
+    const keyExtractor = useCallback((item: TodoItem) => item.id, []);
+
+    return (
+        <FlatList
+            keyExtractor={keyExtractor}
+            data={records}
+            renderItem={renderItem}
+            ListFooterComponent={ListFooter}
+        />
+    );
 };
