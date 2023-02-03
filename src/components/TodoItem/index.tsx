@@ -6,6 +6,11 @@ import type { TodoItem } from '~/store';
 import { useTodo } from '~/store/hooks';
 
 export const defaultStyles = {
+    rightIconContainer: {
+        alignItems: 'center',
+        flexDirection: 'row',
+        gap: 'spacings.2',
+    },
     states: {
         isPending: {},
         isDone: {
@@ -19,10 +24,11 @@ export const Todo: FC<Pick<TodoItem, 'id'>> = ({ id }: { id: string }) => {
     const {
         todo: { isDone, label },
         markAsDone,
+        removeTodo,
     } = useTodo(id);
-    const { ListItem, Checkbox } = useMolecules();
+    const { Checkbox, IconButton, ListItem, View } = useMolecules();
 
-    const styles = useComponentStyles(
+    const componentStyles = useComponentStyles(
         'Todo',
         {},
         {
@@ -33,13 +39,30 @@ export const Todo: FC<Pick<TodoItem, 'id'>> = ({ id }: { id: string }) => {
         },
     );
 
+    const { styles, rightIcons } = useMemo(() => {
+        const { rightIconContainer, ..._styles } = componentStyles;
+        return {
+            styles: _styles,
+            rightIcons: rightIconContainer,
+        };
+    }, [componentStyles]);
+
     const handleToggle = useCallback(() => {
         markAsDone({ id, isDone: !isDone });
     }, [markAsDone, id, isDone]);
 
+    const handleRemove = useCallback(() => {
+        removeTodo({ id });
+    }, [removeTodo, id]);
+
     const right = useMemo(() => {
-        return <Checkbox status={isDone ? 'checked' : 'unchecked'} onChange={handleToggle} />;
-    }, [Checkbox, isDone, handleToggle]);
+        return (
+            <View style={rightIcons}>
+                <Checkbox status={isDone ? 'checked' : 'unchecked'} onChange={handleToggle} />
+                <IconButton onPress={handleRemove} name="delete" />
+            </View>
+        );
+    }, [Checkbox, IconButton, View, isDone, handleToggle, handleRemove, rightIcons]);
 
     return (
         <ListItem right={right}>

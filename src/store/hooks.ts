@@ -11,9 +11,9 @@ export const useTodoState = () => {
 };
 
 export const useTodo = (todoId: string) => {
-    const { todos, markAsDone } = useTodoState();
+    const { todos, markAsDone, removeTodo } = useTodoState();
     const todo = todos.find(({ id }) => id === todoId);
     if (!todo) throw new Error(`Trying to read a todo [${todoId}] that doesn't exist`);
 
-    return useMemo(() => ({ todo, markAsDone }), [todo, markAsDone]);
+    return useMemo(() => ({ todo, markAsDone, removeTodo }), [todo, markAsDone, removeTodo]);
 };

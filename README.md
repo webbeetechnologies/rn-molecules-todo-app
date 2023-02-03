@@ -2,20 +2,21 @@
 
 ## User Stories
 
-- [x] As a user, I want to see all the todo items in one screen
-- [x] As a user, I want to mark a todo as done
-- [x] As a user, I want to distinguish a completed todo from a pending one
-- [x] As a user, I want to be able to use the application in dark mode
-- [ ] As a user, I want to add a todo
-- [ ] As a user, I want to delete a todo
+-   [x] As a user, I want to see all the todo items in one screen
+-   [x] As a user, I want to mark a todo as done
+-   [x] As a user, I want to distinguish a completed todo from a pending one
+-   [x] As a user, I want to be able to use the application in dark mode
+-   [x] As a user, I want to delete a todo
+-   [ ] As a user, I want to add a todo
+-   [ ] As a user, I want to edit a todo
 
 ## Features
 
-Dark Mode
-Component Inject
-Style/ Theme injection
-Custom Component inject
-useMolecules
+-   [x] Dark Mode
+-   [x] Component Inject
+-   [x] Style/ Theme injection
+-   [x] Custom Component inject
+-   [x] useMolecules
 
 ## Video Explanation
 
@@ -25,3 +26,4 @@ useMolecules
 -   [Toggle Todo](https://www.loom.com/share/c813af2245574ba99e13b4180afc6fc9)
 -   [Default Styles](https://www.loom.com/share/2caea97a91f448d38304630ad166edec)
 -   [Color Modes](https://www.loom.com/share/b82930c37cb04153a5edd593dcf1fae8)
+-   [Deleting Todo](https://www.loom.com/share/145d10a3fbb4422ea43319dbbea6a240)
