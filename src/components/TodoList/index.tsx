@@ -1,4 +1,5 @@
-import { FC, useMemo } from 'react';
+import { useControlledValue } from '@bambooapp/bamboo-molecules';
+import { FC, useCallback, useMemo } from 'react';
 
 import type { TodoItem, TodoListState } from '~/store';
 import { useTodoState } from '~/store/hooks';
@@ -11,6 +12,27 @@ type Props = {
 
 const defaultFilter = (record: TodoItem[]) => record;
 
+const ListFooter = () => {
+    const { TodoInput } = useMolecules();
+    const { addTodo } = useTodoState();
+    const [value, setValue] = useControlledValue({
+        defaultValue: '',
+    });
+
+    const handleCancel = useCallback(() => {
+        setValue('');
+    }, [setValue]);
+
+    const onSave = useCallback(() => {
+        addTodo({ label: value });
+        setValue('');
+    }, [value, addTodo, setValue]);
+
+    return (
+        <TodoInput value={value} onChangeText={setValue} onSave={onSave} onCancel={handleCancel} />
+    );
+};
+
 export const TodoList: FC<Props> = props => {
     const { filter = defaultFilter } = props;
     const { todos } = useTodoState();
@@ -19,5 +41,5 @@ export const TodoList: FC<Props> = props => {
 
     const renderItem = ({ item }: { item: TodoItem }) => <Todo id={item.id} />;
 
-    return <FlatList data={records} renderItem={renderItem} />;
+    return <FlatList data={records} renderItem={renderItem} ListFooterComponent={ListFooter} />;
 };

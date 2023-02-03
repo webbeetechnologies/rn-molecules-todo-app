@@ -45,28 +45,28 @@ const todoReducer = (state: TodoListState['todos'], action: TodoAction) => {
 
 const todosMocks: TodoItem[] = [
     {
-        id: '0',
+        id: uniqueId(),
         label: 'Item One',
         createdAt: new Date(),
         updatedAt: new Date(),
         isDone: false,
     },
     {
-        id: '1',
+        id: uniqueId(),
         label: 'Item Two',
         createdAt: new Date(),
         updatedAt: new Date(),
         isDone: false,
     },
     {
-        id: '2',
+        id: uniqueId(),
         label: 'Item Three',
         createdAt: new Date(),
         updatedAt: new Date(),
         isDone: false,
     },
     {
-        id: '3',
+        id: uniqueId(),
         label: 'Item Four',
         createdAt: new Date(),
         updatedAt: new Date(),

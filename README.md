@@ -7,7 +7,7 @@
 -   [x] As a user, I want to distinguish a completed todo from a pending one
 -   [x] As a user, I want to be able to use the application in dark mode
 -   [x] As a user, I want to delete a todo
--   [ ] As a user, I want to add a todo
+-   [x] As a user, I want to add a todo
 -   [ ] As a user, I want to edit a todo
 
 ## Features
@@ -27,3 +27,4 @@
 -   [Default Styles](https://www.loom.com/share/2caea97a91f448d38304630ad166edec)
 -   [Color Modes](https://www.loom.com/share/b82930c37cb04153a5edd593dcf1fae8)
 -   [Deleting Todo](https://www.loom.com/share/145d10a3fbb4422ea43319dbbea6a240)
+-   [Adding Todo](https://www.loom.com/share/15468969d9404094bc9d1377d209d939)
