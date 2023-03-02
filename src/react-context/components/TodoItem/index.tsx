@@ -112,7 +112,7 @@ export const Todo: FC<Pick<TodoItem, 'id'>> = ({ id }: { id: string }) => {
     const right = useMemo(() => {
         return (
             <View style={rightIcons}>
-                <Checkbox status={isDone ? 'checked' : 'unchecked'} onChange={handleToggle} />
+                <Checkbox value={isDone} onChange={handleToggle} />
                 <IconButton onPress={handleRemove} name="delete" />
             </View>
         );
