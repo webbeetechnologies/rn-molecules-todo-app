@@ -2,8 +2,8 @@ import { useControlledValue } from '@bambooapp/bamboo-molecules';
 import { FC, useCallback, useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 
-import type { TodoItem, TodoListState } from '~/store';
-import { useTodoState } from '~/store/hooks';
+import type { TodoItem, TodoListState } from '~/react-context/store';
+import { useTodoState } from '~/react-context/store/hooks';
 
 import { useMolecules } from '../hooks';
 

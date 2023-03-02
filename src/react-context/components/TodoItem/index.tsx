@@ -3,8 +3,8 @@ import { useCallback, useEffect } from 'react';
 import { FC, useMemo } from 'react';
 import type { ViewStyle } from 'react-native';
 
-import type { TodoItem } from '~/store';
-import { useTodo } from '~/store/hooks';
+import type { TodoItem } from '~/react-context/store';
+import { useTodo } from '~/react-context/store/hooks';
 
 import { useMolecules } from '../hooks';
 

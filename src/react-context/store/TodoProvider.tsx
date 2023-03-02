@@ -7,8 +7,8 @@ import {
     TodoAction,
     TodoItem,
     TodoListState,
-} from '~/store/state.types';
-import { TodoContext } from '~/store/todo-context';
+} from '~/react-context/store/state.types';
+import { TodoContext } from '~/react-context/store/todo-context';
 
 const todoReducer = (state: TodoListState['todos'], action: TodoAction) => {
     const now = new Date();

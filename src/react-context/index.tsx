@@ -1,10 +1,9 @@
 import { extendTheme, ProvideMolecules } from '@bambooapp/bamboo-molecules';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { NavigationContainer } from '~/Navigation';
-
 import { components } from './components';
 import { theme } from './components/styles';
+import { NavigationContainer } from './Navigation';
 
 const extendedTheme = extendTheme(theme);
 

@@ -4,9 +4,9 @@ import { DarkTheme, DefaultTheme, NavigationContainer } from '@react-navigation/
 import type { ComponentProps, FC } from 'react';
 import { useMemo } from 'react';
 
-import { TodoList } from '~/components/TodoList';
-import { TodoProvider } from '~/store';
-import type { TodoListState } from '~/store/state.types';
+import { TodoList } from '~/react-context/components/TodoList';
+import { TodoProvider } from '~/react-context/store';
+import type { TodoListState } from '~/react-context/store/state.types';
 
 import { ColorModeToggle } from './components/ColorModeToggle';
 import { DrawerIcon } from './components/DrawerIcon';
