@@ -12,5 +12,6 @@ export const DrawerIcon = () => {
     const toggleDrawer = useCallback(() => {
         navigation.dispatch(DrawerActions.toggleDrawer());
     }, [navigation]);
+
     return <IconButton name={'menu'} onPress={toggleDrawer} style={styles.drawerIcon} />;
 };
